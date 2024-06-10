@@ -8,6 +8,17 @@ st.markdown("<h2 style='text-align: center; color: #4B0082;'>Aprende y diviérte
 
 # Añadir una imagen
 st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Bandera_de_Tawantinsuyu.svg/2560px-Bandera_de_Tawantinsuyu.svg.png", width=400, caption="Bandera de Tahuantinsuyo")
+
+# Añadir una descripción
+st.markdown("""
+<p style='text-align: justify;'>
+La preservación y promoción de las lenguas indígenas es fundamental para mantener viva la riqueza cultural y la identidad de los pueblos originarios. 
+El quechua, una de las lenguas más habladas en América del Sur, es un tesoro lingüístico que merece ser valorado y aprendido. 
+Contar con traductores y conjugadores en quechua no solo facilita el aprendizaje de la lengua, sino que también contribuye a su revitalización y transmisión a las futuras generaciones. 
+Estas herramientas permiten a los hablantes y estudiantes de quechua comunicarse con mayor precisión y confianza, promoviendo el uso cotidiano y académico de la lengua.
+</p>
+""", unsafe_allow_html=True)
+
 verbos = pd.read_excel('quechua.xlsx')
 ################################################################
 ################################################################
