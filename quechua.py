@@ -51,10 +51,10 @@ dict_que_esp = dict(zip(quechua,espanol))
 
 import streamlit as st
 
-option = st.selectbox(
+base = st.selectbox(
     "Selecciona un verbo en quechua",quechua)
 
-st.write("el verbo seleccionado en espanol:", dict_que_esp[option])
+st.write("el verbo seleccionado en espanol:", dict_que_esp[base])
 
 ## persona
 
@@ -74,5 +74,5 @@ tiempo = st.radio(
     index=None,
 )
 
-st.write("Tu elegiste:", tiempo)
+st.write("El verbo conjugado es:", conju_final(base,numero,persona,tiempo))
 
