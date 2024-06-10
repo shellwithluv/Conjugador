@@ -5,7 +5,6 @@ verbos = pd.read_excel('quechua.xlsx')
 ################################################################
 
 #abrimos el excel, en el que se adjunta los tiempos verbales del quechua
-datos = pd.read_excel('tarea4.xlsx')
 
 quechua = pd.ExcelFile('tarea4.xlsx')
 # Se define un diccionario vacío que se usará para almacenar otros diccionarios que representan
@@ -26,9 +25,6 @@ for hoja in quechua.sheet_names:
   # donde cada diccionario interno representa una tiempo verbal en el archivo de excel.
   D[hoja] = d
 
-def conju_quechua(base, numero, persona, tiempo):
-  return base + D[tiempo][numero][persona]
-
 pronombres = pd.read_excel('pronombres1.xlsx')
 
 dfp = pd.read_excel('pronombres1.xlsx')
@@ -39,8 +35,16 @@ dfp.set_index(c[0], inplace=True)
 ## Se convierte el dataframe en un diccionario
 dp = dfp.to_dict()
 
-def conju_final(base,numero,persona,tiempo):
-  return dp[numero][persona] + ' ' + base + D[tiempo][numero][persona]
+def conju_final(base, numero, persona, tiempo):
+    try:
+        resultado = dp[numero][persona] + ' ' + base + D[tiempo][numero][persona]
+        return resultado
+    except KeyError as e:
+        st.write(f"Error: La clave {e} no fue encontrada en los diccionarios")
+        st.write(f"Valores actuales - Numero: {numero}, Persona: {persona}, Tiempo: {tiempo}")
+        st.write(f"Claves en dp: {list(dp.keys())}")
+        st.write(f"Claves en D[tiempo]: {list(D[tiempo].keys())}")
+        return None
 
 ################################################################
 ################################################################
