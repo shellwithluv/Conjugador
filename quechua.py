@@ -71,5 +71,8 @@ numero = st.selectbox(
 tiempo = st.selectbox(
     "Elige el tiempo verbal",["Presente","Presente progresivo","Presente habitual","Pasado experimentado","Pasado experimentado progresivo","Pasado experimentado habitual","Pasado no experimentado simple","Pasado no experimentado progres","Pasaso no experimentado habitua"])
 
-st.write("El verbo conjugado es:", conju_final(base,numero,persona,tiempo))
-
+try:
+    resultado = dp[numero][persona] + ' ' + base + D[tiempo][numero][persona]
+    st.write("El verbo conjugado es:", resultado)
+except KeyError as e:
+    st.write(f"Error: La clave {e} no fue encontrada en los diccionarios")
