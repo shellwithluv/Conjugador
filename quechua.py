@@ -68,11 +68,8 @@ numero = st.selectbox(
 
 #tiempo
 
-tiempo = st.radio(
-    "Elige el tiempo verbal",
-    ["Presente","Presente progresivo","Presente habitual","Pasado experimentado","Pasado experimentado progresivo","Pasado experimentado habitual","Pasado no experimentado simple","Pasado no experimentado progres","Pasaso no experimentado habitua"],
-    index=None,
-)
+tiempo = st.selectbox(
+    "Elige el tiempo verbal",["Presente","Presente progresivo","Presente habitual","Pasado experimentado","Pasado experimentado progresivo","Pasado experimentado habitual","Pasado no experimentado simple","Pasado no experimentado progres","Pasaso no experimentado habitua"])
 
 st.write("El verbo conjugado es:", conju_final(base,numero,persona,tiempo))
 
