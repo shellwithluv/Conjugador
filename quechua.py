@@ -1,4 +1,7 @@
 import pandas as pd
+import streamlit as st
+# Título de la página
+st.markdown("<h1 style='color: purple;'>CONJUGADOR DE VERBOS EN QUECHUA</h1>", unsafe_allow_html=True)
 
 verbos = pd.read_excel('quechua.xlsx')
 ################################################################
