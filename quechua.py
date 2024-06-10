@@ -70,7 +70,7 @@ numero = st.selectbox(
 
 tiempo = st.radio(
     "Elige el tiempo verbal",
-    [":rainbow[Presente]", ":yellow[Pasado]", ":blue[Futuro]"],
+    [":rainbow[presente]", ":yellow[pasado]", ":blue[futuro]"],
     index=None,
 )
 
