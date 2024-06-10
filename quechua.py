@@ -70,7 +70,7 @@ numero = st.selectbox(
 
 tiempo = st.radio(
     "Elige el tiempo verbal",
-    ["Presente","Presente progresivo","Presente habitual","Pasado experimentado","Pasado experimentado progresivo","Pasado experimentado habitual","Pasado no experimentado simpleP","Pasado no experimentado progres","Pasaso no experimentado habitua"],
+    ["Presente","Presente progresivo","Presente habitual","Pasado experimentado","Pasado experimentado progresivo","Pasado experimentado habitual","Pasado no experimentado simple","Pasado no experimentado progres","Pasaso no experimentado habitua"],
     index=None,
 )
 
