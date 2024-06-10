@@ -28,6 +28,7 @@ for hoja in quechua.sheet_names:
 pronombres = pd.read_excel('pronombres1.xlsx')
 
 dfp = pd.read_excel('pronombres1.xlsx')
+dfp.columns = dfp.columns.str.strip()  # Eliminar espacios en blanco en los nombres de las columnas
 ## Se seleccionan las columnas del dataframe
 c = dfp.columns
 ## Se cambia el índice del dataframe para que sea la primera columna de este, es decir, la de la persona
