@@ -1,41 +1,35 @@
 import pandas as pd
+import streamlit as st
 
-verbos = pd.read_excel('quechua.xlsx')
-################################################################
-################################################################
+# Leer el archivo de verbos en quechua y español
+verbos = pd.read_excel('/mnt/data/quechua.xlsx')
 
-#abrimos el excel, en el que se adjunta los tiempos verbales del quechua
-
-quechua = pd.ExcelFile('tarea4.xlsx')
-# Se define un diccionario vacío que se usará para almacenar otros diccionarios que representan
-# cada hoja de cálculo del archivo Excel.
+# Leer y procesar el archivo de tiempos verbales del quechua
+file_path = '/mnt/data/tarea4.xlsx'
+quechua = pd.ExcelFile(file_path)
 D = {}
-# Este bucle for recorre cada hoja en el archivo de Excel, el cual devuelve una lista de los nombres de todas las hojas en el archivo.
+
 for hoja in quechua.sheet_names:
-  #Acá, se leerá cada hoja del Excel como un dataframe
-  df = pd.read_excel('tarea4.xlsx', sheet_name=hoja)
-  #Se obtiene los nombres de las columnas del DataFrame df y los almacena en la variable c.
-  c = df.columns
-  # Establece la primera columna del DataFrame (c[0]) como índice del DataFrame
-  df.set_index(c[0], inplace = True)
-  # Convierte el DataFrame (que ahora tiene la primera columna como índice) en un diccionario,
-  # donde la clave es el índice y el valor son los otros valores de las filas asociadas a ese índice.
-  d = df.to_dict()
-  # Acá, se insertan un diccionario dentro de otro diccionario 'D',
-  # donde cada diccionario interno representa una tiempo verbal en el archivo de excel.
-  D[hoja] = d
+    df = pd.read_excel(file_path, sheet_name=hoja)
+    df.columns = df.columns.str.strip()  # Eliminar espacios en blanco en los nombres de las columnas
+    df.rename(columns={df.columns[0]: 'Persona'}, inplace=True)  # Renombrar la primera columna a 'Persona'
+    df.set_index('Persona', inplace=True)  # Establecer la columna 'Persona' como índice
+    d = df.to_dict()
+    D[hoja] = d
+    # Mensaje de depuración
+    st.write(f"Hoja: {hoja}")
+    st.write("DataFrame:", df)
+    st.write("Diccionario:", d)
 
-pronombres = pd.read_excel('pronombres1.xlsx')
-
-dfp = pd.read_excel('pronombres1.xlsx')
+# Leer y procesar el archivo de pronombres
+pronombres = pd.read_excel('/mnt/data/pronombres1.xlsx')
+dfp = pd.read_excel('/mnt/data/pronombres1.xlsx')
 dfp.columns = dfp.columns.str.strip()  # Eliminar espacios en blanco en los nombres de las columnas
-## Se seleccionan las columnas del dataframe
-c = dfp.columns
-## Se cambia el índice del dataframe para que sea la primera columna de este, es decir, la de la persona
-dfp.set_index(c[0], inplace=True)
-## Se convierte el dataframe en un diccionario
+dfp.rename(columns={dfp.columns[0]: 'Persona'}, inplace=True)  # Renombrar la primera columna a 'Persona'
+dfp.set_index('Persona', inplace=True)
 dp = dfp.to_dict()
 
+# Función para conjugar en quechua
 def conju_final(base, numero, persona, tiempo):
     try:
         resultado = dp[numero][persona] + ' ' + base + D[tiempo][numero][persona]
@@ -44,37 +38,29 @@ def conju_final(base, numero, persona, tiempo):
         st.write(f"Error: La clave {e} no fue encontrada en los diccionarios")
         st.write(f"Valores actuales - Numero: {numero}, Persona: {persona}, Tiempo: {tiempo}")
         st.write(f"Claves en dp: {list(dp.keys())}")
-        st.write(f"Claves en D[tiempo]: {list(D[tiempo].keys())}")
+        st.write(f"Claves en D[{tiempo}]: {list(D[tiempo].keys())}")
+        st.write(f"Diccionario D[{tiempo}]: {D[tiempo]}")
         return None
 
-################################################################
-################################################################
+# Crear el diccionario de quechua a español
 quechua = list(verbos['quechua'])
 espanol = list(verbos['espanol'])
+dict_que_esp = dict(zip(quechua, espanol))
 
-dict_que_esp = dict(zip(quechua,espanol))
+# Streamlit UI
+base = st.selectbox("Selecciona un verbo en quechua", quechua)
+st.write("El verbo seleccionado en español:", dict_que_esp[base])
 
-import streamlit as st
-
-base = st.selectbox(
-    "Selecciona un verbo en quechua",quechua)
-
-st.write("el verbo seleccionado en espanol:", dict_que_esp[base])
-
-## persona
-
-persona = st.selectbox(
-    "Selecciona una persona", ["primera", "segunda", "tercera"])
-
-## numero
-
-numero = st.selectbox(
-    "Seleciona un numero", ["singular", "plural"])
-
-#tiempo
-
+# Selección de persona, número y tiempo verbal
+persona = st.selectbox("Selecciona una persona", ["primera", "segunda", "tercera"])
+numero = st.selectbox("Selecciona un número", ["singular", "plural"])
 tiempo = st.selectbox(
-    "Elige el tiempo verbal",["Presente","Presente progresivo","Presente habitual","Pasado experimentado","Pasado experimentado progresivo","Pasado experimentado habitual","Pasado no experimentado simple","Pasado no experimentado progres","Pasaso no experimentado habitua"])
+    "Elige el tiempo verbal",
+    ["Presente", "Presente progresivo", "Presente habitual",
+     "Pasado experimentado", "Pasado experimentado progresivo",
+     "Pasado experimentado habitual", "Pasado no experimentado simple",
+     "Pasado no experimentado progres", "Pasado no experimentado habitua"]
+)
 
 # Mostrar el verbo conjugado
 resultado = conju_final(base, numero, persona, tiempo)
