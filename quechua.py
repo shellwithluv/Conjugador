@@ -4,6 +4,9 @@ import streamlit as st
 # Añadir un poco de CSS para personalizar la apariencia
 st.markdown("""
     <style>
+    body {
+        background-color: #FFFDD0;
+    }
     .title {
         color: purple;
         text-align: center;
