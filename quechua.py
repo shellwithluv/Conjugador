@@ -124,4 +124,9 @@ tiempo = st.selectbox(
 # Mostrar el verbo conjugado
 resultado = conju_final(base, numero, persona, tiempo)
 if resultado:
-    st.write("El verbo conjugado es:", resultado)
+    st.markdown(f"<h3 style='color: green; font-family: \"Comic Sans MS\", cursive, sans-serif;'>El verbo conjugado es: {resultado}</h3>", unsafe_allow_html=True)
+
+# Añadir un botón de acción
+if st.button('Más información sobre la lengua quechua'):
+    st.write("El quechua es una familia de lenguas originarias de los Andes y la región de Cuzco. Es una de las lenguas más habladas en América del Sur.")
+
