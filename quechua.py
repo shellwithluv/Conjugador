@@ -18,7 +18,7 @@ st.markdown("""
         text-align: justify;
         font-family: 'Comic Sans MS', cursive, sans-serif;
     }
-    .selector label {
+    .stSelectbox label {
         font-family: 'Comic Sans MS', cursive, sans-serif;
         color: #4B0082;
         font-size: 20px;
@@ -31,15 +31,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Título de la página
-st.markdown("<h1 style='color: purple;'>CONJUGADOR DE VERBOS EN QUECHUA</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='title'>CONJUGADOR DE VERBOS EN QUECHUA</h1>", unsafe_allow_html=True)
 
 # Añadir un subtítulo
-st.markdown("<h2 style='text-align: center; color: #4B0082;'>Aprende y diviértete conjugando verbos en quechua</h2>", unsafe_allow_html=True)
-
+st.markdown("<h2 class='subtitle'>Aprende y diviértete conjugando verbos en quechua</h2>", unsafe_allow_html=True)
 
 # Añadir una descripción
 st.markdown("""
-<p style='text-align: justify;'>
+<p class='description'>
 La preservación y promoción de las lenguas indígenas es fundamental para mantener viva la riqueza cultural y la identidad de los pueblos originarios. 
 El quechua, una de las lenguas más habladas en América del Sur, es un tesoro lingüístico que merece ser valorado y aprendido. 
 Contar con traductores y conjugadores en quechua no solo facilita el aprendizaje de la lengua, sino que también contribuye a su revitalización y transmisión a las futuras generaciones. 
@@ -99,14 +98,12 @@ def conju_final(base, numero, persona, tiempo):
 quechua = list(verbos['quechua'])
 espanol = list(verbos['espanol'])
 
-dict_que_esp = dict(zip(quechua,espanol))
-
-import streamlit as st
+dict_que_esp = dict(zip(quechua, espanol))
 
 base = st.selectbox(
-    "Selecciona un verbo en quechua",quechua)
+    "Selecciona un verbo en quechua", quechua)
 
-st.write("el verbo seleccionado en espanol:", dict_que_esp[base])
+st.write("el verbo seleccionado en español:", dict_que_esp[base])
 
 ## persona
 
@@ -116,12 +113,14 @@ persona = st.selectbox(
 ## numero
 
 numero = st.selectbox(
-    "Seleciona un numero", ["singular", "plural"])
+    "Selecciona un número", ["singular", "plural"])
 
 #tiempo
 
 tiempo = st.selectbox(
-    "Elige el tiempo verbal",["Presente","Presente progresivo","Presente habitual","Pasado experimentado","Pasado experimentado progresivo","Pasado experimentado habitual","Pasado no experimentado simple","Pasado no experimentado progres","Pasaso no experimentado habitua"])
+    "Elige el tiempo verbal", ["Presente", "Presente progresivo", "Presente habitual",
+                               "Pasado experimentado", "Pasado experimentado progresivo", "Pasado experimentado habitual",
+                               "Pasado no experimentado simple", "Pasado no experimentado progres", "Pasado no experimentado habitual"])
 
 # Mostrar el verbo conjugado
 resultado = conju_final(base, numero, persona, tiempo)
@@ -131,4 +130,3 @@ if resultado:
 # Añadir un botón de acción
 if st.button('Más información sobre la lengua quechua'):
     st.write("El quechua es una familia de lenguas originarias de los Andes y la región de Cuzco. Es una de las lenguas más habladas en América del Sur.")
-
