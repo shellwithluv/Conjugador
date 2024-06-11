@@ -21,6 +21,11 @@ st.markdown("""
     .selector label {
         font-family: 'Comic Sans MS', cursive, sans-serif;
         color: #4B0082;
+        font-size: 20px;
+        
+    .stSelectbox div[role='listbox'] > div {
+        font-size: 20px;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -30,9 +35,6 @@ st.markdown("<h1 style='color: purple;'>CONJUGADOR DE VERBOS EN QUECHUA</h1>", u
 
 # Añadir un subtítulo
 st.markdown("<h2 style='text-align: center; color: #4B0082;'>Aprende y diviértete conjugando verbos en quechua</h2>", unsafe_allow_html=True)
-
-# Añadir una imagen desde una URL diferente
-st.image("https://www.peru.travel/Contenido/Atractivo/Imagen/es/20/1.1/Principal/bandera-de-tahuantinsuyo.jpg", width=400, caption="Bandera de Tahuantinsuyo")
 
 
 # Añadir una descripción
