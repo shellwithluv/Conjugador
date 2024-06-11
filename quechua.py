@@ -121,7 +121,7 @@ numero = st.selectbox(
 #tiempo
 
 tiempo = st.selectbox(
-    "Elige el tiempo verbal", ["Presente", "Presente progresivo", "Presente habitual",
+    "Elige el tiempo verbal", ["Presente simple", "Presente progresivo", "Presente habitual",
                                "Pasado experimentado", "Pasado experimentado progresivo", "Pasado experimentado habitual",
                                "Pasado no experimentado simple", "Pasado no experimentado progres", "Pasado no experimentado habitual"])
 
