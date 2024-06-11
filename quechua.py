@@ -29,6 +29,9 @@ st.markdown("""
     .stSelectbox div[role='listbox'] > div {
         font-size: 20px;
         font-family: 'Comic Sans MS', cursive, sans-serif;
+     }
+    .css-1d391kg, .css-1d391kg, .css-1fv8s86, .css-1fv8s86 {
+        background-color: #FFFDD0;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -47,6 +50,25 @@ El quechua, una de las lenguas más habladas en América del Sur, es un tesoro l
 Contar con traductores y conjugadores en quechua no solo facilita el aprendizaje de la lengua, sino que también contribuye a su revitalización y transmisión a las futuras generaciones. 
 Estas herramientas permiten a los hablantes y estudiantes de quechua comunicarse con mayor precisión y confianza, promoviendo el uso cotidiano y académico de la lengua.
 </p>
+""", unsafe_allow_html=True)
+
+# Añadir una sección de explicación de tiempos verbales
+st.markdown("""
+<h2 class='subtitle'>Tiempos Verbales en Quechua</h2>
+<p class='description'>
+En quechua, al igual que en otras lenguas, los verbos se conjugan para reflejar el tiempo de la acción. A continuación se presentan los principales tiempos verbales en quechua:
+</p>
+<ul class='description'>
+    <li><strong>Presente:</strong> Se utiliza para describir acciones que están ocurriendo en el momento actual.</li>
+    <li><strong>Presente Progresivo:</strong> Se usa para indicar que una acción está ocurriendo en este preciso momento de manera continua.</li>
+    <li><strong>Presente Habitual:</strong> Describe acciones que ocurren regularmente o de manera habitual.</li>
+    <li><strong>Pasado Experimentado:</strong> Se refiere a acciones que fueron experimentadas personalmente por el hablante en el pasado.</li>
+    <li><strong>Pasado Experimentado Progresivo:</strong> Indica una acción en progreso que fue experimentada personalmente en el pasado.</li>
+    <li><strong>Pasado Experimentado Habitual:</strong> Describe acciones que ocurrían regularmente en el pasado y fueron experimentadas personalmente.</li>
+    <li><strong>Pasado No Experimentado Simple:</strong> Se usa para acciones pasadas que el hablante no experimentó personalmente.</li>
+    <li><strong>Pasado No Experimentado Progresivo:</strong> Indica una acción en progreso en el pasado que no fue experimentada personalmente por el hablante.</li>
+    <li><strong>Pasado No Experimentado Habitual:</strong> Describe acciones que ocurrían regularmente en el pasado pero no fueron experimentadas personalmente.</li>
+</ul>
 """, unsafe_allow_html=True)
 
 verbos = pd.read_excel('quechua.xlsx')
