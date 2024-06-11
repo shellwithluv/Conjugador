@@ -152,3 +152,4 @@ if resultado:
 # Añadir un botón de acción
 if st.button('Más información sobre la lengua quechua'):
     st.write("El quechua es una familia de lenguas originarias de los Andes y la región de Cuzco. Es una de las lenguas más habladas en América del Sur.")
+    
