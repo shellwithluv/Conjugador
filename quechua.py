@@ -4,7 +4,7 @@ import streamlit as st
 # Añadir un poco de CSS para personalizar la apariencia
 st.markdown("""
     <style>
-    body {
+    .reportview-container {
         background-color: #FFFDD0;
     }
     .title {
@@ -29,9 +29,6 @@ st.markdown("""
     .stSelectbox div[role='listbox'] > div {
         font-size: 20px;
         font-family: 'Comic Sans MS', cursive, sans-serif;
-     }
-    .css-1d391kg, .css-1d391kg, .css-1fv8s86, .css-1fv8s86 {
-        background-color: #FFFDD0;
     }
     </style>
 """, unsafe_allow_html=True)
