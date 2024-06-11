@@ -22,7 +22,7 @@ st.markdown("""
         font-family: 'Comic Sans MS', cursive, sans-serif;
         color: #4B0082;
         font-size: 20px;
-        
+    }
     .stSelectbox div[role='listbox'] > div {
         font-size: 20px;
         font-family: 'Comic Sans MS', cursive, sans-serif;
