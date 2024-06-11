@@ -1,5 +1,30 @@
 import pandas as pd
 import streamlit as st
+
+# Añadir un poco de CSS para personalizar la apariencia
+st.markdown("""
+    <style>
+    .title {
+        color: purple;
+        text-align: center;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .subtitle {
+        text-align: center;
+        color: #4B0082;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .description {
+        text-align: justify;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .selector label {
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        color: #4B0082;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Título de la página
 st.markdown("<h1 style='color: purple;'>CONJUGADOR DE VERBOS EN QUECHUA</h1>", unsafe_allow_html=True)
 
