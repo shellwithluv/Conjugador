@@ -8,7 +8,7 @@ st.markdown("""
         background-color: #FFFDD0;
     }
     .title {
-        color: purple;
+        color: green;
         text-align: center;
         font-family: 'Comic Sans MS', cursive, sans-serif;
     }
