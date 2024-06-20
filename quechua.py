@@ -8,9 +8,13 @@ st.markdown("""
         background-color: #FFFDD0;
     }
     .title {
-        color: rainbow;
         text-align: center;
         font-family: 'Comic Sans MS', cursive, sans-serif;
+        font-size: 3em;
+        background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: rainbow 5s infinite;
     }
     .subtitle {
         text-align: center;
