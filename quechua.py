@@ -54,24 +54,18 @@ Estas herramientas permiten a los hablantes y estudiantes de quechua comunicarse
 if st.button('Más información sobre la lengua quechua'):
     st.write("El quechua es una familia de lenguas originarias de los Andes y la región de Cuzco. Es una de las lenguas más habladas en América del Sur.")
 
-# Añadir una sección de explicación de tiempos verbales
-st.markdown("""
-<h2 class='subtitle'>Tiempos Verbales en Quechua</h2>
-<p class='description'>
-En quechua, al igual que en otras lenguas, los verbos se conjugan para reflejar el tiempo de la acción. A continuación se presentan los principales tiempos verbales en quechua:
-</p>
-<ul class='description'>
-    <li><strong>Presente:</strong> Se utiliza para describir acciones que están ocurriendo en el momento actual.</li>
-    <li><strong>Presente progresivo:</strong> Se usa para indicar que una acción está ocurriendo en este preciso momento de manera continua.</li>
-    <li><strong>Presente habitual:</strong> Describe acciones que ocurren regularmente o de manera habitual.</li>
-    <li><strong>Pasado experimentado:</strong> Se refiere a acciones que fueron experimentadas personalmente por el hablante en el pasado.</li>
-    <li><strong>Pasado experimentado progresivo:</strong> Indica una acción en progreso que fue experimentada personalmente en el pasado.</li>
-    <li><strong>Pasado experimentado habitual:</strong> Describe acciones que ocurrían regularmente en el pasado y fueron experimentadas personalmente.</li>
-    <li><strong>Pasado no experimentado simple:</strong> Se usa para acciones pasadas que el hablante no experimentó personalmente.</li>
-    <li><strong>Pasado no experimentado progresivo:</strong> Indica una acción en progreso en el pasado que no fue experimentada personalmente por el hablante.</li>
-    <li><strong>Pasado no experimentado habitual:</strong> Describe acciones que ocurrían regularmente en el pasado pero no fueron experimentadas personalmente.</li>
-</ul>
-""", unsafe_allow_html=True)
+# Diccionario de información de tiempos verbales
+tiempos_verbales_info = {
+    "Presente simple": "Se utiliza para describir acciones que están ocurriendo en el momento actual.",
+    "Presente progresivo": "Se usa para indicar que una acción está ocurriendo en este preciso momento de manera continua.",
+    "Presente habitual": "Describe acciones que ocurren regularmente o de manera habitual.",
+    "Pasado experimentado": "Se refiere a acciones que fueron experimentadas personalmente por el hablante en el pasado.",
+    "Pasado experimentado progresivo": "Indica una acción en progreso que fue experimentada personalmente en el pasado.",
+    "Pasado experimentado habitual": "Describe acciones que ocurrían regularmente en el pasado y fueron experimentadas personalmente.",
+    "Pasado no experimentado simple": "Se usa para acciones pasadas que el hablante no experimentó personalmente.",
+    "Pasado no experimentado progresivo": "Indica una acción en progreso en el pasado que no fue experimentada personalmente por el hablante.",
+    "Pasado no experimentado habitual": "Describe acciones que ocurrían regularmente en el pasado pero no fueron experimentadas personalmente."
+}
 
 verbos = pd.read_excel('quechua.xlsx')
 ################################################################
@@ -149,7 +143,7 @@ tiempo = st.selectbox(
                                "Pasado experimentado", "Pasado experimentado progresivo", "Pasado experimentado habitual",
                                "Pasado no experimentado simple", "Pasado no experimentado progres", "Pasado no experimentado habitual"])
 # Mostrar la información del tiempo verbal seleccionado
-st.markdown(f"<p class='description'><strong>Información del tiempo verbal:</strong> {tiempo[tiempo]}</p>", unsafe_allow_html=True)
+st.markdown(f"<p class='description'><strong>Información del tiempo verbal:</strong> {tiempos_verbales_info[tiempo]}</p>", unsafe_allow_html=True)
 
 # Mostrar el verbo conjugado
 resultado = conju_final(base, numero, persona, tiempo)
