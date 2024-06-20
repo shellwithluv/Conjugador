@@ -148,6 +148,8 @@ tiempo = st.selectbox(
     "Elige el tiempo verbal", ["Presente simple", "Presente progresivo", "Presente habitual",
                                "Pasado experimentado", "Pasado experimentado progresivo", "Pasado experimentado habitual",
                                "Pasado no experimentado simple", "Pasado no experimentado progres", "Pasado no experimentado habitual"])
+# Mostrar la información del tiempo verbal seleccionado
+st.markdown(f"<p class='description'><strong>Información del tiempo verbal:</strong> {tiempo[tiempo]}</p>", unsafe_allow_html=True)
 
 # Mostrar el verbo conjugado
 resultado = conju_final(base, numero, persona, tiempo)
