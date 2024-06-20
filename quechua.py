@@ -11,10 +11,7 @@ st.markdown("""
         text-align: center;
         font-family: 'Comic Sans MS', cursive, sans-serif;
         font-size: 3em;
-        background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-        -webkit-background-clip: text;
-        color: transparent;
-        animation: rainbow 5s infinite;
+        color: #D1A3A4;  /* Color palo rosa */
     }
     .subtitle {
         text-align: center;
@@ -155,5 +152,5 @@ tiempo = st.selectbox(
 # Mostrar el verbo conjugado
 resultado = conju_final(base, numero, persona, tiempo)
 if resultado:
-    st.markdown(f"<h3 style='color: green; font-family: \"Comic Sans MS\", cursive, sans-serif;'>El verbo conjugado es: {resultado}</h3>", unsafe_allow_html=True)
+    st.markdown(f"<h3 style='color: #D1A3A4; font-family: \"Comic Sans MS\", cursive, sans-serif;'>El verbo conjugado es: {resultado}</h3>", unsafe_allow_html=True)
 
