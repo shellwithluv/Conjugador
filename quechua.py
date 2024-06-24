@@ -138,13 +138,15 @@ def conju_final(base, numero, persona, tiempo):
 
 ################################################################
 ################################################################
-# Añadir un input para que el usuario ingrese el verbo en quechua
-base = st.text_input("Ingresa un verbo en quechua")
+quechua = list(verbos['quechua'])
+espanol = list(verbos['espanol'])
 
-if base and base in verbos['quechua'].values:
-    # Mostrar el verbo en español
-    dict_que_esp = dict(zip(verbos['quechua'], verbos['espanol']))
-    st.write("El verbo ingresado en español es:", dict_que_esp[base])
+dict_que_esp = dict(zip(quechua, espanol))
+
+base = st.selectbox(
+    "Selecciona un verbo en quechua", quechua)
+
+st.write("el verbo seleccionado en español:", dict_que_esp[base])
 
 ## persona
 
