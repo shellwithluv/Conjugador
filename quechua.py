@@ -64,7 +64,7 @@ elif opcion == "Quiénes somos":
     st.markdown("<h2 class='subtitle'>Quiénes somos</h2>", unsafe_allow_html=True)
     st.markdown("""
     <p class='description'>
-    Somos un equipo comprometido con la preservación y promoción de las lenguas indígenas, especialmente el quechua. Nuestro objetivo es proporcionar herramientas y recursos que faciliten el aprendizaje y uso del quechua en la vida cotidiana y académica. Creemos en la importancia de mantener vivas las lenguas originarias y de transmitirlas a las futuras generaciones. A través de este conjugador de verbos en quechua, esperamos contribuir a la revitalización de esta hermosa lengua y apoyar a los estudiantes y hablantes de quechua en su camino de aprendizaje.
+    Este es un proyecto del curso "Linguistica computacional". El objetivo es proporcionar herramientas y recursos que faciliten el aprendizaje y uso del quechua en la vida cotidiana y académica. Creemos en la importancia de mantener vivas las lenguas originarias y de transmitirlas a las futuras generaciones. A través de este conjugador de verbos en quechua, esperamos contribuir a la revitalización de esta hermosa lengua y apoyar a los estudiantes y hablantes de quechua en su camino de aprendizaje.
     </p>
     """, unsafe_allow_html=True)
 
