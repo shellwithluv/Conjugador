@@ -37,7 +37,8 @@ st.markdown("""
 # Título de la página
 st.markdown("<h1 class='title'>CONJUGADOR DE VERBOS EN QUECHUA</h1>", unsafe_allow_html=True)
 
-# Crear una barra lateral con opciones
+# Crear una barra lateral con opciones e imagen
+st.sidebar.image("/mnt/data/lenguas-originarias.jpg", use_column_width=True)
 opcion = st.sidebar.selectbox(
     "Navega por la información",
     ["Conjugador de verbos en quechua", "Historia sobre el quechua", "Por qué un conjugador de quechua", "Quiénes somos"]
@@ -46,6 +47,7 @@ opcion = st.sidebar.selectbox(
 # Mostrar contenido según la opción seleccionada
 if opcion == "Historia sobre el quechua":
     st.markdown("<h2 class='subtitle'>Historia sobre el quechua</h2>", unsafe_allow_html=True)
+    st.image("/mnt/data/lenguas-originarias.jpg", use_column_width=True)
     st.markdown("""
     <p class='description'>
     El quechua es una familia de lenguas originarias de los Andes y la región de Cuzco. Es una de las lenguas más habladas en América del Sur, con millones de hablantes en países como Perú, Bolivia, Ecuador, Colombia y Argentina. La lengua quechua ha sido transmitida de generación en generación y tiene una rica historia que data de la época precolombina. A lo largo de los siglos, el quechua ha jugado un papel crucial en la cultura y la identidad de los pueblos andinos.
@@ -54,6 +56,7 @@ if opcion == "Historia sobre el quechua":
 
 elif opcion == "Por qué un conjugador de quechua":
     st.markdown("<h2 class='subtitle'>Por qué un conjugador de quechua</h2>", unsafe_allow_html=True)
+    st.image("/mnt/data/lenguas-originarias.jpg", use_column_width=True)
     st.markdown("""
     <p class='description'>
     La preservación y promoción de las lenguas indígenas es fundamental para mantener viva la riqueza cultural y la identidad de los pueblos originarios. El quechua, una de las lenguas más habladas en América del Sur, es un tesoro lingüístico que merece ser valorado y aprendido. Contar con traductores y conjugadores en quechua no solo facilita el aprendizaje de la lengua, sino que también contribuye a su revitalización y transmisión a las futuras generaciones. Estas herramientas permiten a los hablantes y estudiantes de quechua comunicarse con mayor precisión y confianza, promoviendo el uso cotidiano y académico de la lengua.
@@ -62,14 +65,16 @@ elif opcion == "Por qué un conjugador de quechua":
 
 elif opcion == "Quiénes somos":
     st.markdown("<h2 class='subtitle'>Quiénes somos</h2>", unsafe_allow_html=True)
+    st.image("/mnt/data/lenguas-originarias.jpg", use_column_width=True)
     st.markdown("""
     <p class='description'>
     Este es un proyecto del curso "Linguistica computacional". El objetivo es proporcionar herramientas y recursos que faciliten el aprendizaje y uso del quechua en la vida cotidiana y académica. Creemos en la importancia de mantener vivas las lenguas originarias y de transmitirlas a las futuras generaciones. A través de este conjugador de verbos en quechua, esperamos contribuir a la revitalización de esta hermosa lengua y apoyar a los estudiantes y hablantes de quechua en su camino de aprendizaje.
     </p>
     """, unsafe_allow_html=True)
 
-# Añadir un subtítulo
+# Añadir un subtítulo y una imagen en la página principal
 st.markdown("<h2 class='subtitle'>Aprende y diviértete conjugando verbos en quechua</h2>", unsafe_allow_html=True)
+st.image("/mnt/data/lenguas-originarias.jpg", use_column_width=True)
 
 # Añadir una descripción
 st.markdown("""
