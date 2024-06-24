@@ -71,15 +71,6 @@ elif opcion == "Quiénes somos":
 # Añadir un subtítulo
 st.markdown("<h2 class='subtitle'>Aprende y diviértete conjugando verbos en quechua</h2>", unsafe_allow_html=True)
 
-# Añadir una descripción
-st.markdown("""
-<p class='description'>
-La preservación y promoción de las lenguas indígenas es fundamental para mantener viva la riqueza cultural y la identidad de los pueblos originarios. 
-El quechua, una de las lenguas más habladas en América del Sur, es un tesoro lingüístico que merece ser valorado y aprendido. 
-Contar con traductores y conjugadores en quechua no solo facilita el aprendizaje de la lengua, sino que también contribuye a su revitalización y transmisión a las futuras generaciones. 
-Estas herramientas permiten a los hablantes y estudiantes de quechua comunicarse con mayor precisión y confianza, promoviendo el uso cotidiano y académico de la lengua.
-</p>
-""", unsafe_allow_html=True)
 
 # Añadir un botón de acción
 if st.button('Más información sobre la lengua quechua'):
