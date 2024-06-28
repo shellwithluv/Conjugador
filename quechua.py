@@ -37,12 +37,6 @@ st.markdown("""
 # Título de la página
 st.markdown("<h1 class='title'>CONJUGADOR DE VERBOS EN QUECHUA Y AYMARA</h1>", unsafe_allow_html=True)
 
-# Crear una barra lateral con opciones
-lengua = st.sidebar.selectbox(
-    "Selecciona una lengua",
-    ["Quechua", "Aymara"]
-)
-
 # Función y datos para el quechua
 def cargar_datos_quechua():
     verbos_quechua = pd.read_excel('quechua_verbos.xlsx')
@@ -62,7 +56,7 @@ def cargar_datos_quechua():
     dp_quechua = dfp.to_dict()
     return verbos_quechua, D_quechua, dp_quechua
 
-# Función y datos para el aymara (debes crear y cargar tus archivos de datos correspondientes)
+# Función y datos para el aymara 
 def cargar_datos_aymara():
     verbos_aymara = pd.read_excel('aimara_verbos.xlsx')
     aymara = pd.ExcelFile('aimara.xlsx')
@@ -104,15 +98,25 @@ def conju_final(base, numero, persona, tiempo, dp, D):
         st.write(f"Claves en dp: {list(dp.keys())}")
         st.write(f"Claves en D[tiempo]: {list(D[tiempo].keys())}")
         return None
+    
+# Cargar datos
+verbos_quechua, D_quechua, dp_quechua = cargar_datos_quechua()
+verbos_aymara, D_aymara, dp_aymara = cargar_datos_aymara()
+
+# Selección de lengua y configuración de datos correspondientes
+lengua = st.selectbox(
+    "Selecciona una lengua",
+    ["Quechua", "Aymara"]
+)
 
 if lengua == "Quechua":
-    verbos, D, dp = cargar_datos_quechua()
+    verbos = verbos_quechua
+    D = D_quechua
+    dp = dp_quechua
 elif lengua == "Aymara":
-    verbos, D, dp = cargar_datos_aymara()
-    
-# Verifica las claves de persona en dp y ajusta las opciones del selectbox
-numeros = list(dp.keys())  # Obtén las claves de número del diccionario dp
-personas = list(dp['singular'].keys())  # Obtén las claves de persona del diccionario dp
+    verbos = verbos_aymara
+    D = D_aymara
+    dp = dp_aymara
 
 quechua = list(verbos['quechua'])
 espanol = list(verbos['espanol'])
@@ -124,13 +128,15 @@ base = st.selectbox(
 
 st.write("El verbo seleccionado en español:", dict_que_esp[base])
 
-## persona
-persona = st.selectbox(
-    "Selecciona una persona", ["primera inclusiva", "primera exclusiva", "segunda","tercera"])
-
-## numero
+# Selección de número
 numero = st.selectbox(
-    "Selecciona un número", ["singular", "plural"])
+    "Selecciona un número", list(dp.keys())
+)
+
+# Selección de persona
+persona = st.selectbox(
+    "Selecciona una persona", list(dp[numero].keys())
+)
 
 ## tiempo
 tiempo = st.selectbox(
