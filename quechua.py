@@ -161,3 +161,4 @@ if verbo_col in verbos.columns:
     if resultado:
         st.markdown(f"<h3 style='color: #D1A3A4; font-family: \"Comic Sans MS\", cursive, sans-serif;'>El verbo conjugado es: {resultado}</h3>", unsafe_allow_html=True)
 else:
+    st.write(f"Error: La columna '{verbo_col}' no existe en el archivo de verbos para {lengua.lower()}.")
