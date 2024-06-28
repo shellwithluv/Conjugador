@@ -120,10 +120,8 @@ elif lengua == "Aimara":
     dp = dp_aymara
     verbo_col = 'aimara'
 
-# Verificar las columnas disponibles en el DataFrame
-if 'quechua' not in verbos.columns and 'aimara' not in verbos.columns:
-    st.write(f"Error: Las columnas esperadas no existen en el archivo de verbos para {lengua.lower()}.")
-else:
+# Verificar si la columna correspondiente existe en el DataFrame
+if verbo_col in verbos.columns:
     verbos_lista = list(verbos[verbo_col])
     espanol_lista = list(verbos['espanol'])
 
@@ -159,3 +157,4 @@ else:
     resultado = conju_final(base, numero, persona, tiempo, dp, D)
     if resultado:
         st.markdown(f"<h3 style='color: #D1A3A4; font-family: \"Comic Sans MS\", cursive, sans-serif;'>El verbo conjugado es: {resultado}</h3>", unsafe_allow_html=True)
+else:
