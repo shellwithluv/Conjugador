@@ -111,6 +111,7 @@ elif lengua == "Aymara":
     verbos, D, dp = cargar_datos_aymara()
     
 # Verifica las claves de persona en dp y ajusta las opciones del selectbox
+numeros = list(dp.keys())  # Obtén las claves de número del diccionario dp
 personas = list(dp['singular'].keys())  # Obtén las claves de persona del diccionario dp
 
 quechua = list(verbos['quechua'])
