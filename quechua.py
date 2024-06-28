@@ -35,48 +35,53 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Título de la página
-st.markdown("<h1 class='title'>CONJUGADOR DE VERBOS EN QUECHUA</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='title'>CONJUGADOR DE VERBOS EN QUECHUA Y AYMARA</h1>", unsafe_allow_html=True)
 
 # Crear una barra lateral con opciones
-opcion = st.sidebar.selectbox(
-    "Navega por la información",
-    ["Conjugador de verbos en quechua", "Historia sobre el quechua", "Por qué un conjugador de quechua", "Quiénes somos"]
+lengua = st.sidebar.selectbox(
+    "Selecciona una lengua",
+    ["Quechua", "Aymara"]
 )
 
-# Mostrar contenido según la opción seleccionada
-if opcion == "Historia sobre el quechua":
-    st.markdown("<h2 class='subtitle'>Historia sobre el quechua</h2>", unsafe_allow_html=True)
-    st.markdown("""
-    <p class='description'>
-    El quechua es una familia de lenguas originarias de los Andes y la región de Cuzco. Es una de las lenguas más habladas en América del Sur, con millones de hablantes en países como Perú, Bolivia, Ecuador, Colombia y Argentina. La lengua quechua ha sido transmitida de generación en generación y tiene una rica historia que data de la época precolombina. A lo largo de los siglos, el quechua ha jugado un papel crucial en la cultura y la identidad de los pueblos andinos.
-    </p>
-    """, unsafe_allow_html=True)
+# Función y datos para el quechua
+def cargar_datos_quechua():
+    verbos_quechua = pd.read_excel('quechua.xlsx')
+    quechua = pd.ExcelFile('tarea4.xlsx')
+    D_quechua = {}
+    for hoja in quechua.sheet_names:
+        df = pd.read_excel('tarea4.xlsx', sheet_name=hoja)
+        c = df.columns
+        df.set_index(c[0], inplace=True)
+        d = df.to_dict()
+        D_quechua[hoja] = d
+    pronombres_quechua = pd.read_excel('pronombres1.xlsx')
+    dfp = pd.read_excel('pronombres1.xlsx')
+    dfp.columns = dfp.columns.str.strip()
+    c = dfp.columns
+    dfp.set_index(c[0], inplace=True)
+    dp_quechua = dfp.to_dict()
+    return verbos_quechua, D_quechua, dp_quechua
 
-elif opcion == "Por qué un conjugador de quechua":
-    st.markdown("<h2 class='subtitle'>Por qué un conjugador de quechua</h2>", unsafe_allow_html=True)
-    st.markdown("""
-    <p class='description'>
-    La preservación y promoción de las lenguas indígenas es fundamental para mantener viva la riqueza cultural y la identidad de los pueblos originarios. El quechua, una de las lenguas más habladas en América del Sur, es un tesoro lingüístico que merece ser valorado y aprendido. Contar con traductores y conjugadores en quechua no solo facilita el aprendizaje de la lengua, sino que también contribuye a su revitalización y transmisión a las futuras generaciones. Estas herramientas permiten a los hablantes y estudiantes de quechua comunicarse con mayor precisión y confianza, promoviendo el uso cotidiano y académico de la lengua.
-    </p>
-    """, unsafe_allow_html=True)
+# Función y datos para el aymara (debes crear y cargar tus archivos de datos correspondientes)
+def cargar_datos_aymara():
+    verbos_aymara = pd.read_excel('aimara_verbos.xlsx')
+    aymara = pd.ExcelFile('aimara.xlsx')
+    D_aymara = {}
+    for hoja in aymara.sheet_names:
+        df = pd.read_excel('aimara.xlsx', sheet_name=hoja)
+        c = df.columns
+        df.set_index(c[0], inplace=True)
+        d = df.to_dict()
+        D_aymara[hoja] = d
+    pronombres_aymara = pd.read_excel('pronombres_aimara.xlsx')
+    dfp = pd.read_excel('pronombres_aimara.xlsx')
+    dfp.columns = dfp.columns.str.strip()
+    c = dfp.columns
+    dfp.set_index(c[0], inplace=True)
+    dp_aymara = dfp.to_dict()
+    return verbos_aymara, D_aymara, dp_aymara
 
-elif opcion == "Quiénes somos":
-    st.markdown("<h2 class='subtitle'>Quiénes somos</h2>", unsafe_allow_html=True)
-    st.markdown("""
-    <p class='description'>
-    Este es un proyecto del curso "Linguistica computacional". El objetivo es proporcionar herramientas y recursos que faciliten el aprendizaje y uso del quechua en la vida cotidiana y académica. Creemos en la importancia de mantener vivas las lenguas originarias y de transmitirlas a las futuras generaciones. A través de este conjugador de verbos en quechua, esperamos contribuir a la revitalización de esta lengua.
-    </p>
-    """, unsafe_allow_html=True)
-
-# Añadir un subtítulo
-st.markdown("<h2 class='subtitle'>Aprende y diviértete conjugando verbos en quechua</h2>", unsafe_allow_html=True)
-
-
-# Añadir un botón de acción
-if st.button('Más información sobre la lengua quechua'):
-    st.write("El quechua es una familia de lenguas originarias de los Andes y la región de Cuzco. Es una de las lenguas más habladas en América del Sur.")
-
-# Diccionario de información de tiempos verbales
+# Diccionario de información de tiempos verbales (puedes ajustarlo según necesites)
 tiempos_verbales_info = {
     "Presente simple": "Se utiliza para describir acciones que están ocurriendo en el momento actual.",
     "Presente progresivo": "Se usa para indicar que una acción está ocurriendo en este preciso momento de manera continua.",
@@ -89,43 +94,8 @@ tiempos_verbales_info = {
     "Pasado no experimentado habitual": "Describe acciones que ocurrían regularmente en el pasado pero no fueron experimentadas personalmente."
 }
 
-verbos = pd.read_excel('quechua.xlsx')
-################################################################
-################################################################
-
-#abrimos el excel, en el que se adjunta los tiempos verbales del quechua
-
-quechua = pd.ExcelFile('tarea4.xlsx')
-# Se define un diccionario vacío que se usará para almacenar otros diccionarios que representan
-# cada hoja de cálculo del archivo Excel.
-D = {}
-# Este bucle for recorre cada hoja en el archivo de Excel, el cual devuelve una lista de los nombres de todas las hojas en el archivo.
-for hoja in quechua.sheet_names:
-  #Acá, se leerá cada hoja del Excel como un dataframe
-  df = pd.read_excel('tarea4.xlsx', sheet_name=hoja)
-  #Se obtiene los nombres de las columnas del DataFrame df y los almacena en la variable c.
-  c = df.columns
-  # Establece la primera columna del DataFrame (c[0]) como índice del DataFrame
-  df.set_index(c[0], inplace = True)
-  # Convierte el DataFrame (que ahora tiene la primera columna como índice) en un diccionario,
-  # donde la clave es el índice y el valor son los otros valores de las filas asociadas a ese índice.
-  d = df.to_dict()
-  # Acá, se insertan un diccionario dentro de otro diccionario 'D',
-  # donde cada diccionario interno representa una tiempo verbal en el archivo de excel.
-  D[hoja] = d
-
-pronombres = pd.read_excel('pronombres1.xlsx')
-
-dfp = pd.read_excel('pronombres1.xlsx')
-dfp.columns = dfp.columns.str.strip()  # Eliminar espacios en blanco en los nombres de las columnas
-## Se seleccionan las columnas del dataframe
-c = dfp.columns
-## Se cambia el índice del dataframe para que sea la primera columna de este, es decir, la de la persona
-dfp.set_index(c[0], inplace=True)
-## Se convierte el dataframe en un diccionario
-dp = dfp.to_dict()
-
-def conju_final(base, numero, persona, tiempo):
+# Función para conjugar verbos (puedes adaptarla según necesites)
+def conju_final(base, numero, persona, tiempo, dp, D):
     try:
         resultado = dp[numero][persona] + ' ' + base + D[tiempo][numero][persona]
         return resultado
@@ -136,39 +106,37 @@ def conju_final(base, numero, persona, tiempo):
         st.write(f"Claves en D[tiempo]: {list(D[tiempo].keys())}")
         return None
 
-################################################################
-################################################################
+if lengua == "Quechua":
+    verbos, D, dp = cargar_datos_quechua()
+elif lengua == "Aymara":
+    verbos, D, dp = cargar_datos_aymara()
+
 quechua = list(verbos['quechua'])
 espanol = list(verbos['espanol'])
 
 dict_que_esp = dict(zip(quechua, espanol))
 
 base = st.selectbox(
-    "Selecciona un verbo en quechua", quechua)
+    "Selecciona un verbo en " + lengua.lower(), quechua)
 
-st.write("el verbo seleccionado en español:", dict_que_esp[base])
+st.write("El verbo seleccionado en español:", dict_que_esp[base])
 
 ## persona
-
 persona = st.selectbox(
     "Selecciona una persona", ["primera", "segunda", "tercera"])
 
 ## numero
-
 numero = st.selectbox(
     "Selecciona un número", ["singular", "plural"])
 
-#tiempo
-
+## tiempo
 tiempo = st.selectbox(
-    "Elige el tiempo verbal", ["Presente simple", "Presente progresivo", "Presente habitual",
-                               "Pasado experimentado", "Pasado experimentado progresivo", "Pasado experimentado habitual",
-                               "Pasado no experimentado simple", "Pasado no experimentado progres", "Pasado no experimentado habitual"])
+    "Elige el tiempo verbal", ["presente simple", "pasado experimental", "pasado no experimentado","futuro","futuro lejano"
+                               "pasado habitual","presente habitual"])
 # Mostrar la información del tiempo verbal seleccionado
 st.markdown(f"<p class='description'><strong>Información del tiempo verbal:</strong> {tiempos_verbales_info[tiempo]}</p>", unsafe_allow_html=True)
 
 # Mostrar el verbo conjugado
-resultado = conju_final(base, numero, persona, tiempo)
+resultado = conju_final(base, numero, persona, tiempo, dp, D)
 if resultado:
     st.markdown(f"<h3 style='color: #D1A3A4; font-family: \"Comic Sans MS\", cursive, sans-serif;'>El verbo conjugado es: {resultado}</h3>", unsafe_allow_html=True)
-
