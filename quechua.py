@@ -122,7 +122,7 @@ st.write("El verbo seleccionado en español:", dict_que_esp[base])
 
 ## persona
 persona = st.selectbox(
-    "Selecciona una persona", ["primera", "segunda", "tercera"])
+    "Selecciona una persona", ["primera inclusiva", "primera exclusiva", "segunda","tercera"])
 
 ## numero
 numero = st.selectbox(
