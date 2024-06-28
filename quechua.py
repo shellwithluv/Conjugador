@@ -112,7 +112,7 @@ lengua = st.selectbox(
 if lengua == "Quechua":
     verbos = verbos_quechua
     D = D_quechua
-    dp = dp_quechua()
+    dp = dp_quechua
 elif lengua == "Aymara":
     verbos = verbos_aymara
     D = D_aymara
