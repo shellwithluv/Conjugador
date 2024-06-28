@@ -121,42 +121,41 @@ elif lengua == "Aimara":
     verbo_col = 'aimara'
 
 # Verificar las columnas disponibles en el DataFrame
-st.write(f"Columnas disponibles en el DataFrame de {lengua.lower()}: {verbos.columns}")
+if 'quechua' not in verbos.columns and 'aimara' not in verbos.columns:
+    st.write(f"Error: Las columnas esperadas no existen en el archivo de verbos para {lengua.lower()}.")
+else:
+    verbos_lista = list(verbos[verbo_col])
+    espanol_lista = list(verbos['espanol'])
 
-# Asegurarse de que las columnas existen
-if verbo_col not in verbos.columns:
-    st.write(f"Error: La columna {verbo_col} no existe en el archivo de verbos para {lengua.lower()}.")
-    
-verbos_lista = list(verbos[verbo_col])
-espanol_lista = list(verbos['espanol'])
+    dict_que_esp = dict(zip(verbos_lista, espanol_lista))
 
-dict_que_esp = dict(zip(verbos_lista, espanol_lista))
+    base = st.selectbox(
+        f"Selecciona un verbo en {lengua.lower()}",
+        verbos_lista
+    )
 
-base = st.selectbox(
-    f"Selecciona un verbo en {lengua.lower()}",
-    verbos_lista
-)
+    st.write("El verbo seleccionado en español:", dict_que_esp[base])
 
-st.write("El verbo seleccionado en español:", dict_que_esp[base])
+    # Selección de número
+    numero = st.selectbox(
+        "Selecciona un número", list(dp.keys())
+    )
 
-# Selección de número
-numero = st.selectbox(
-    "Selecciona un número", list(dp.keys())
-)
+    # Selección de persona
+    persona = st.selectbox(
+        "Selecciona una persona", list(dp[numero].keys())
+    )
 
-# Selección de persona
-persona = st.selectbox(
-    "Selecciona una persona", list(dp[numero].keys())
-)
+    # Selección de tiempo
+    tiempo = st.selectbox(
+        "Elige el tiempo verbal", ["presente simple", "pasado experimental", "pasado no experimentado", "futuro", "futuro lejano", 
+                                "pasado habitual", "presente habitual"]
+    )
 
-## tiempo
-tiempo = st.selectbox(
-    "Elige el tiempo verbal", ["presente simple", "pasado experimental", "pasado no experimentado","futuro","futuro lejano",
-                               "pasado habitual","presente habitual"])
-# Mostrar la información del tiempo verbal seleccionado
-st.markdown(f"<p class='description'><strong>Información del tiempo verbal:</strong> {tiempos_verbales_info[tiempo]}</p>", unsafe_allow_html=True)
+    # Mostrar la información del tiempo verbal seleccionado
+    st.markdown(f"<p class='description'><strong>Información del tiempo verbal:</strong> {tiempos_verbales_info[tiempo]}</p>", unsafe_allow_html=True)
 
-# Mostrar el verbo conjugado
-resultado = conju_final(base, numero, persona, tiempo, dp, D)
-if resultado:
-    st.markdown(f"<h3 style='color: #D1A3A4; font-family: \"Comic Sans MS\", cursive, sans-serif;'>El verbo conjugado es: {resultado}</h3>", unsafe_allow_html=True)
+    # Mostrar el verbo conjugado
+    resultado = conju_final(base, numero, persona, tiempo, dp, D)
+    if resultado:
+        st.markdown(f"<h3 style='color: #D1A3A4; font-family: \"Comic Sans MS\", cursive, sans-serif;'>El verbo conjugado es: {resultado}</h3>", unsafe_allow_html=True)
