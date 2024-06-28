@@ -120,13 +120,12 @@ elif lengua == "Aymara":
     verbo_col = 'aimara'
 
 quechua = list(verbos['quechua'])
-aimara = list(verbos['aimara'])
 espanol = list(verbos['espanol'])
 
 dict_que_esp = dict(zip(quechua, espanol))
 
 base = st.selectbox(
-    "Selecciona un verbo en " + lengua.lower(), quechua, aimara)
+    "Selecciona un verbo en " + lengua.lower(), quechua)
 
 st.write("El verbo seleccionado en español:", dict_que_esp[base])
 
