@@ -119,16 +119,14 @@ elif lengua == "Aymara":
     dp = dp_aymara
     verbo_col = 'aimara'
 
-# Verificar las columnas disponibles en el DataFrame
-st.write(f"Columnas disponibles en el DataFrame de {lengua.lower()}: {verbos.columns}")
+quechua = list(verbos['quechua'])
+aimara = list(verbos['aimara'])
+espanol = list(verbos['espanol'])
 
-verbos_lista = list(verbos[verbo_col])
-espanol_lista = list(verbos['espanol'])
-
-dict_que_esp = dict(zip(verbos_lista, espanol_lista))
+dict_que_esp = dict(zip(quechua, espanol))
 
 base = st.selectbox(
-    "Selecciona un verbo en " + lengua.lower(), verbos_lista)
+    "Selecciona un verbo en " + lengua.lower(), quechua, aimara)
 
 st.write("El verbo seleccionado en español:", dict_que_esp[base])
 
