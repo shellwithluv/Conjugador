@@ -45,7 +45,7 @@ lengua = st.sidebar.selectbox(
 
 # Función y datos para el quechua
 def cargar_datos_quechua():
-    verbos_quechua = pd.read_excel('quechua.xlsx')
+    verbos_quechua = pd.read_excel('quechua_verbos.xlsx')
     quechua = pd.ExcelFile('tarea4.xlsx')
     D_quechua = {}
     for hoja in quechua.sheet_names:
