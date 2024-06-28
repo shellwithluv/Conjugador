@@ -123,6 +123,10 @@ elif lengua == "Aimara":
 # Verificar las columnas disponibles en el DataFrame
 st.write(f"Columnas disponibles en el DataFrame de {lengua.lower()}: {verbos.columns}")
 
+# Asegurarse de que las columnas existen
+if verbo_col not in verbos.columns:
+    st.write(f"Error: La columna {verbo_col} no existe en el archivo de verbos para {lengua.lower()}.")
+    
 verbos_lista = list(verbos[verbo_col])
 espanol_lista = list(verbos['espanol'])
 
