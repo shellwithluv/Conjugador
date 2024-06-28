@@ -130,7 +130,7 @@ numero = st.selectbox(
 
 ## tiempo
 tiempo = st.selectbox(
-    "Elige el tiempo verbal", ["presente simple", "pasado experimental", "pasado no experimentado","futuro","futuro lejano"
+    "Elige el tiempo verbal", ["presente simple", "pasado experimental", "pasado no experimentado","futuro","futuro lejano",
                                "pasado habitual","presente habitual"])
 # Mostrar la información del tiempo verbal seleccionado
 st.markdown(f"<p class='description'><strong>Información del tiempo verbal:</strong> {tiempos_verbales_info[tiempo]}</p>", unsafe_allow_html=True)
