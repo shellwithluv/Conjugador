@@ -118,7 +118,7 @@ elif lengua == "Aymara":
     D = D_aymara
     dp = dp_aymara
 
-quechua = list(verbos['quechua'])
+quechua = list(verbos['aimara'])
 espanol = list(verbos['espanol'])
 
 dict_que_esp = dict(zip(quechua, espanol))
