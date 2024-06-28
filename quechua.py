@@ -119,6 +119,9 @@ elif lengua == "Aimara":
     D = D_aymara
     dp = dp_aymara
     verbo_col = 'aimara'
+    
+# Verificar las columnas disponibles en el DataFrame
+st.write(f"Columnas disponibles en el DataFrame de {lengua.lower()}: {verbos.columns}")
 
 # Verificar si la columna correspondiente existe en el DataFrame
 if verbo_col in verbos.columns:
