@@ -83,15 +83,14 @@ def cargar_datos_aymara():
 
 # Diccionario de información de tiempos verbales (puedes ajustarlo según necesites)
 tiempos_verbales_info = {
-    "Presente simple": "Se utiliza para describir acciones que están ocurriendo en el momento actual.",
-    "Presente progresivo": "Se usa para indicar que una acción está ocurriendo en este preciso momento de manera continua.",
-    "Presente habitual": "Describe acciones que ocurren regularmente o de manera habitual.",
-    "Pasado experimentado": "Se refiere a acciones que fueron experimentadas personalmente por el hablante en el pasado.",
-    "Pasado experimentado progresivo": "Indica una acción en progreso que fue experimentada personalmente en el pasado.",
-    "Pasado experimentado habitual": "Describe acciones que ocurrían regularmente en el pasado y fueron experimentadas personalmente.",
-    "Pasado no experimentado simple": "Se usa para acciones pasadas que el hablante no experimentó personalmente.",
-    "Pasado no experimentado progresivo": "Indica una acción en progreso en el pasado que no fue experimentada personalmente por el hablante.",
-    "Pasado no experimentado habitual": "Describe acciones que ocurrían regularmente en el pasado pero no fueron experimentadas personalmente."
+    "presente simple": "Se utiliza para describir acciones que están ocurriendo en el momento actual.",
+    "presente habitual": "Describe acciones que ocurren regularmente o de manera habitual.",
+    "pasado experimental": "Se refiere a acciones que fueron experimentadas personalmente por el hablante en el pasado.",
+    "pasado habitual": "Describe acciones que ocurrían regularmente en el pasado y fueron experimentadas personalmente.",
+    "pasado no experimentado": "Se usa para acciones pasadas que el hablante no experimentó personalmente.",
+    "futuro":"Indica acciones que ocurrirán en un tiempo cercano al presente.",
+    "futuro lejano": "Se utiliza para describir acciones que ocurrirán en un tiempo distante en el futuro."
+    
 }
 
 # Función para conjugar verbos (puedes adaptarla según necesites)
