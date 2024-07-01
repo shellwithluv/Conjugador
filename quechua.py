@@ -89,9 +89,20 @@ tiempos_verbales_info = {
 
 # Función para conjugar verbos (puedes adaptarla según necesites)
 def conju_final(base, numero, persona, tiempo, dp, D):
+    base = base.strip()
+    numero = numero.strip()
+    persona = persona.strip()
+    tiempo = tiempo.strip()
+
     try:
-        resultado = dp[numero][persona] + ' ' + base + D[tiempo][numero][persona]
-        return resultado
+        # st.write(f"Valores actuales - Numero: {numero}, Persona: {persona}, Tiempo: {tiempo}")
+        # st.write(f"Dp: {dp}")
+        # st.write(f"D: {D}")
+        if type(dp[numero][persona])!=str or type(D[tiempo][numero][persona])!=str:
+            return False
+        else:
+            resultado = dp[numero][persona] + ' ' + base + D[tiempo][numero][persona]
+            return resultado
     except KeyError as e:
         st.write(f"Error: La clave {e} no fue encontrada en los diccionarios")
         st.write(f"Valores actuales - Numero: {numero}, Persona: {persona}, Tiempo: {tiempo}")
@@ -106,26 +117,29 @@ verbos_aymara, D_aymara, dp_aymara = cargar_datos_aymara()
 # Selección de lengua y configuración de datos correspondientes
 lengua = st.selectbox(
     "Selecciona una lengua",
-    ["Quechua", "Aymara"]
+    ["Quechua","Aymara"]
 )
 
 if lengua == "Quechua":
     verbos = verbos_quechua
     D = D_quechua
     dp = dp_quechua
+    quechua = list(verbos['quechua'])
+    espanol = list(verbos['espanol'])
+    dict_que_esp = dict(zip(quechua, espanol))
+    base = st.selectbox(
+        "Selecciona un verbo en " + lengua.lower(), quechua)
+
 elif lengua == "Aymara":
     verbos = verbos_aymara
     D = D_aymara
     dp = dp_aymara
     verbo_col = 'aimara'
-    
-aimara = list(verbos['aimara'])
-espanol = list(verbos['espanol'])
-
-dict_que_esp = dict(zip(aimara, espanol))
-
-base = st.selectbox(
-    "Selecciona un verbo en " + lengua.lower(), aimara)
+    aimara = list(verbos['aimara'])
+    espanol = list(verbos['espanol'])
+    dict_que_esp = dict(zip(aimara, espanol))
+    base = st.selectbox(
+        "Selecciona un verbo en " + lengua.lower(), aimara)
 
 st.write("El verbo seleccionado en español:", dict_que_esp[base])
 
@@ -150,3 +164,5 @@ st.markdown(f"<p class='description'><strong>Información del tiempo verbal:</st
 resultado = conju_final(base, numero, persona, tiempo, dp, D)
 if resultado:
     st.markdown(f"<h3 style='color: #D1A3A4; font-family: \"Comic Sans MS\", cursive, sans-serif;'>El verbo conjugado es: {resultado}</h3>", unsafe_allow_html=True)
+else:
+    st.markdown("<h3 style='color: #D1A3A4; font-family: \"Comic Sans MS\", cursive, sans-serif;'>No existe la conjugación. Por favor, selecciona otra combinación de valores.</hjson>", unsafe_allow_html=True)
