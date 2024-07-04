@@ -38,65 +38,65 @@ st.markdown("""
 st.markdown("<h1 class='title'>CONJUGADOR DE VERBOS EN QUECHUA Y AYMARA</h1>", unsafe_allow_html=True)
 
 #Se crea una barra lateral con diversas opciones
-st.sidebar.title("Menú")
+st.sidebar.title("Menú") # Establecemos el título de la barra lateral
 opcion = st.sidebar.radio(
     "Selecciona una opción:",
     ("Quienes somos", "Por qué es importante estudiar estas lenguas", "Bibliografía")
 )
-
-if opcion == "Quienes somos":
+# Creamos condicionales para mostrar el contenido correspondiente a la opción seleccionada
+if opcion == "Quienes somos": # Si la opción seleccionada es "Quienes somos"
     st.sidebar.markdown("""
         Este es un trabajo final del curso de Linguística Computacional de la PUCP. La misión es proporcionar herramientas digitales que faciliten el aprendizaje y la difusión del quechua y el aymara.
-    """)
-elif opcion == "Por qué es importante estudiar estas lenguas":
+    """) # Muestra el contenido sobre "Quienes somos" en la barra lateral
+elif opcion == "Por qué es importante estudiar estas lenguas": # Si la opción seleccionada es "Por qué es importante estudiar estas lenguas"
     st.sidebar.markdown("""
         Estudiar lenguas originarias como el quechua y el aymara es crucial para preservar la riqueza cultural y lingüística de nuestras comunidades.
-    """)
-elif opcion == "Bibliografía":
+    """) # Muestra el contenido sobre la importancia de estudiar estas lenguas en la barra lateral
+elif opcion == "Bibliografía":  # Si la opción seleccionada es "Bibliografía"
     st.sidebar.markdown("""
         La bibliografía utilizada para desarrollar este conjugador de verbos incluye el libro de Rodolfo Cerrón-Palomino "Quechumara: Estructuras paralelas del quechua y aimara (2008)".
-    """)
-# Función para cargar datos de Quechua desde archivos Excel
+    """) # Muestra la bibliografía en la barra lateral
+# Se crea una función para cargar datos de Quechua desde archivos Excel
 def cargar_datos_quechua():
-    # Cargar el archivo de verbos en Quechua
+    # Cargamos el archivo de verbos en Quechua
     verbos_quechua = pd.read_excel('quechua_verbos.xlsx')
-    # Cargar el archivo que contiene varias hojas de datos de Quechua
+    # Cargamos el archivo que contiene varias hojas de datos de Quechua
     quechua = pd.ExcelFile('tarea4.xlsx')
     # Diccionario para almacenar los datos de las diferentes hojas
     D_quechua = {}
-    # Iterar sobre cada hoja del archivo Excel
+    # Iteramos sobre cada hoja del archivo Excel
     for hoja in quechua.sheet_names:
         df = pd.read_excel('tarea4.xlsx', sheet_name=hoja)
         c = df.columns
         df.set_index(c[0], inplace=True)
         d = df.to_dict()
         D_quechua[hoja] = d
-    # Cargar el archivo de pronombres en Quechua
+    # Cargamos el archivo de pronombres en Quechua
     pronombres_quechua = pd.read_excel('pronombres1.xlsx')
     dfp = pd.read_excel('pronombres1.xlsx')
     dfp.columns = dfp.columns.str.strip()
     c = dfp.columns
     dfp.set_index(c[0], inplace=True)
     dp_quechua = dfp.to_dict()
-    # Retornar los datos cargados
+    # Retornamos los datos cargados
     return verbos_quechua, D_quechua, dp_quechua
 
 # Función para cargar datos de Aymara desde archivos Excel
 def cargar_datos_aymara():
     # Cargar el archivo de verbos en Aymara
     verbos_aymara = pd.read_excel('aimara_verbos.xlsx')
-    # Cargar el archivo que contiene varias hojas de datos de Aymara
+    # Cargamos el archivo que contiene varias hojas de datos de Aymara
     aymara = pd.ExcelFile('aimara.xlsx')
-    # Cargar el archivo que contiene varias hojas de datos de Aymara
+    # Cargamos el archivo que contiene varias hojas de datos de Aymara
     D_aymara = {}
-    # Cargar el archivo que contiene varias hojas de datos de Aymara
+    # Cargamos el archivo que contiene varias hojas de datos de Aymara
     for hoja in aymara.sheet_names:
         df = pd.read_excel('aimara.xlsx', sheet_name=hoja)
         c = df.columns
         df.set_index(c[0], inplace=True)
         d = df.to_dict()
         D_aymara[hoja] = d
-    # Cargar el archivo que contiene varias hojas de datos de Aymara
+    # Cargamos el archivo que contiene varias hojas de datos de Aymara
     pronombres_aymara = pd.read_excel('pronombres_aimara.xlsx')
     dfp = pd.read_excel('pronombres_aimara.xlsx')
     dfp.columns = dfp.columns.str.strip()
@@ -105,7 +105,7 @@ def cargar_datos_aymara():
     dp_aymara = dfp.to_dict()
     return verbos_aymara, D_aymara, dp_aymara
 
-# Diccionario de información de tiempos verbales (puedes ajustarlo según necesites)
+# Diccionario de información de tiempos verbales
 tiempos_verbales_info = {
     "presente simple": "Se utiliza para describir acciones que están ocurriendo en el momento actual.",
     "presente habitual": "Describe acciones que ocurren regularmente o de manera habitual.",
@@ -126,50 +126,50 @@ def conju_final(base, numero, persona, tiempo, dp, D):
     tiempo = tiempo.strip()
 
     try:
-        # Comprobar que los valores en los diccionarios sean cadenas de texto
+        # Compranbamos que los valores en los diccionarios sean cadenas de texto
         if type(dp[numero][persona])!=str or type(D[tiempo][numero][persona])!=str:
             return False
         else:
-            # Construir la conjugación combinando el pronombre, la base del verbo y el sufijo del tiempo verbal
+            #Se construye la conjugación combinando el pronombre, la base del verbo y el sufijo del tiempo verbal
             resultado = dp[numero][persona] + ' ' + base + D[tiempo][numero][persona]
             return resultado
     except KeyError as e:
-        # Manejar errores de clave no encontrada
+        #Manejamos los errores de clave no encontradas
         st.write(f"Error: La clave {e} no fue encontrada en los diccionarios")
         st.write(f"Valores actuales - Numero: {numero}, Persona: {persona}, Tiempo: {tiempo}")
         st.write(f"Claves en dp: {list(dp.keys())}")
         st.write(f"Claves en D[tiempo]: {list(D[tiempo].keys())}")
         return None
     
-# Cargar datos de Quechua y Aymara
+# Cargamos los datos de Quechua y Aymara
 verbos_quechua, D_quechua, dp_quechua = cargar_datos_quechua()
 verbos_aymara, D_aymara, dp_aymara = cargar_datos_aymara()
 
-# Selección de lengua y configuración de datos correspondientes
+# Selección de la lengua y configuración de datos correspondientes
 lengua = st.selectbox(
     "Selecciona una lengua",
     ["Quechua","Aymara"]
 )
 
 # Configuración de datos según la lengua seleccionada
-if lengua == "Quechua":
-    verbos = verbos_quechua
-    D = D_quechua
-    dp = dp_quechua
-    quechua = list(verbos['quechua'])
-    espanol = list(verbos['espanol'])
-    dict_que_esp = dict(zip(quechua, espanol))
+if lengua == "Quechua": # Verifica si la lengua seleccionada es Quechua
+    verbos = verbos_quechua # Asigna los datos de los verbos en Quechua a la variable 'verbos'
+    D = D_quechua # Asigna el diccionario de conjugaciones en Quechua a la variable 'D'
+    dp = dp_quechua # Asigna el diccionario de pronombres en Quechua a la variable 'dp'
+    quechua = list(verbos['quechua'])  # Extrae la columna de verbos en Quechua y la convierte en una lista
+    espanol = list(verbos['espanol'])  # Extrae la columna de traducción al español de los verbos y la convierte en una lista
+    dict_que_esp = dict(zip(quechua, espanol)) # Crea un diccionario que relaciona los verbos en Quechua con sus traducciones al español
     base = st.selectbox(
-        "Selecciona un verbo en " + lengua.lower(), quechua)
+        "Selecciona un verbo en " + lengua.lower(), quechua)  # Muestra un menú desplegable con los verbos en Quechua para que el usuario seleccione uno
 
-elif lengua == "Aymara":
-    verbos = verbos_aymara
-    D = D_aymara
-    dp = dp_aymara
-    verbo_col = 'aimara'
-    aimara = list(verbos['aimara'])
-    espanol = list(verbos['espanol'])
-    dict_que_esp = dict(zip(aimara, espanol))
+elif lengua == "Aymara": # Verifica si la lengua seleccionada es Aymara
+    verbos = verbos_aymara # Asigna los datos de los verbos en Aymara a la variable 'verbos'
+    D = D_aymara # Asigna el diccionario de conjugaciones en Aymara a la variable 'D'
+    dp = dp_aymara # Asigna el diccionario de pronombres en Aymara a la variable 'dp'
+    verbo_col = 'aimara' # Define el nombre de la columna que contiene los verbos en Aymara 
+    aimara = list(verbos['aimara']) # Extrae la columna de verbos en Aymara y la convierte en una lista
+    espanol = list(verbos['espanol'])  # Extrae la columna de traducción al español de los verbos y la convierte en una lista
+    dict_que_esp = dict(zip(aimara, espanol)) # Crea un diccionario que relaciona los verbos en Aymara con sus traducciones al español
     base = st.selectbox(
         "Selecciona un verbo en " + lengua.lower(), aimara)
 
@@ -190,10 +190,10 @@ persona = st.selectbox(
 tiempo = st.selectbox(
     "Elige el tiempo verbal", ["presente simple", "pasado experimental", "pasado no experimentado","futuro","futuro lejano",
                                "pasado habitual","presente habitual"])
-# Mostrar la información del tiempo verbal seleccionado
+# Mostramos la información del tiempo verbal seleccionado
 st.markdown(f"<p class='description'><strong>Información del tiempo verbal:</strong> {tiempos_verbales_info[tiempo]}</p>", unsafe_allow_html=True)
 
-# Mostrar el verbo conjugado
+# Mostramos el verbo conjugado
 resultado = conju_final(base, numero, persona, tiempo, dp, D)
 if resultado:
     st.markdown(f"<h3 style='color: #D1A3A4; font-family: \"Comic Sans MS\", cursive, sans-serif;'>El verbo conjugado es: {resultado}</h3>", unsafe_allow_html=True)
