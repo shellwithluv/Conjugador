@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-# Añadir un poco de CSS para personalizar la apariencia
+#Se añade un poco de CSS para personalizar la apariencia de la página
 st.markdown("""
     <style>
     .reportview-container {
@@ -34,39 +34,50 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Título de la página
+#Se inserta el título de la página
 st.markdown("<h1 class='title'>CONJUGADOR DE VERBOS EN QUECHUA Y AYMARA</h1>", unsafe_allow_html=True)
 
-# Función y datos para el quechua
+# Función para cargar datos de Quechua desde archivos Excel
 def cargar_datos_quechua():
+    # Cargar el archivo de verbos en Quechua
     verbos_quechua = pd.read_excel('quechua_verbos.xlsx')
+    # Cargar el archivo que contiene varias hojas de datos de Quechua
     quechua = pd.ExcelFile('tarea4.xlsx')
+    # Diccionario para almacenar los datos de las diferentes hojas
     D_quechua = {}
+    # Iterar sobre cada hoja del archivo Excel
     for hoja in quechua.sheet_names:
         df = pd.read_excel('tarea4.xlsx', sheet_name=hoja)
         c = df.columns
         df.set_index(c[0], inplace=True)
         d = df.to_dict()
         D_quechua[hoja] = d
+    # Cargar el archivo de pronombres en Quechua
     pronombres_quechua = pd.read_excel('pronombres1.xlsx')
     dfp = pd.read_excel('pronombres1.xlsx')
     dfp.columns = dfp.columns.str.strip()
     c = dfp.columns
     dfp.set_index(c[0], inplace=True)
     dp_quechua = dfp.to_dict()
+    # Retornar los datos cargados
     return verbos_quechua, D_quechua, dp_quechua
 
-# Función y datos para el aymara 
+# Función para cargar datos de Aymara desde archivos Excel
 def cargar_datos_aymara():
+    # Cargar el archivo de verbos en Aymara
     verbos_aymara = pd.read_excel('aimara_verbos.xlsx')
+    # Cargar el archivo que contiene varias hojas de datos de Aymara
     aymara = pd.ExcelFile('aimara.xlsx')
+    # Cargar el archivo que contiene varias hojas de datos de Aymara
     D_aymara = {}
+    # Cargar el archivo que contiene varias hojas de datos de Aymara
     for hoja in aymara.sheet_names:
         df = pd.read_excel('aimara.xlsx', sheet_name=hoja)
         c = df.columns
         df.set_index(c[0], inplace=True)
         d = df.to_dict()
         D_aymara[hoja] = d
+    # Cargar el archivo que contiene varias hojas de datos de Aymara
     pronombres_aymara = pd.read_excel('pronombres_aimara.xlsx')
     dfp = pd.read_excel('pronombres_aimara.xlsx')
     dfp.columns = dfp.columns.str.strip()
@@ -87,30 +98,31 @@ tiempos_verbales_info = {
     
 }
 
-# Función para conjugar verbos (puedes adaptarla según necesites)
+# Función para conjugar verbos
 def conju_final(base, numero, persona, tiempo, dp, D):
+    # Limpiamos los espacios en blanco de los parámetros
     base = base.strip()
     numero = numero.strip()
     persona = persona.strip()
     tiempo = tiempo.strip()
 
     try:
-        # st.write(f"Valores actuales - Numero: {numero}, Persona: {persona}, Tiempo: {tiempo}")
-        # st.write(f"Dp: {dp}")
-        # st.write(f"D: {D}")
+        # Comprobar que los valores en los diccionarios sean cadenas de texto
         if type(dp[numero][persona])!=str or type(D[tiempo][numero][persona])!=str:
             return False
         else:
+            # Construir la conjugación combinando el pronombre, la base del verbo y el sufijo del tiempo verbal
             resultado = dp[numero][persona] + ' ' + base + D[tiempo][numero][persona]
             return resultado
     except KeyError as e:
+        # Manejar errores de clave no encontrada
         st.write(f"Error: La clave {e} no fue encontrada en los diccionarios")
         st.write(f"Valores actuales - Numero: {numero}, Persona: {persona}, Tiempo: {tiempo}")
         st.write(f"Claves en dp: {list(dp.keys())}")
         st.write(f"Claves en D[tiempo]: {list(D[tiempo].keys())}")
         return None
     
-# Cargar datos
+# Cargar datos de Quechua y Aymara
 verbos_quechua, D_quechua, dp_quechua = cargar_datos_quechua()
 verbos_aymara, D_aymara, dp_aymara = cargar_datos_aymara()
 
@@ -120,6 +132,7 @@ lengua = st.selectbox(
     ["Quechua","Aymara"]
 )
 
+# Configuración de datos según la lengua seleccionada
 if lengua == "Quechua":
     verbos = verbos_quechua
     D = D_quechua
@@ -141,6 +154,7 @@ elif lengua == "Aymara":
     base = st.selectbox(
         "Selecciona un verbo en " + lengua.lower(), aimara)
 
+# Mostramos el verbo seleccionado en español
 st.write("El verbo seleccionado en español:", dict_que_esp[base])
 
 # Selección de número
@@ -153,7 +167,7 @@ persona = st.selectbox(
     "Selecciona una persona", list(dp[numero].keys())
 )
 
-## tiempo
+#Selección de tiempo verbal
 tiempo = st.selectbox(
     "Elige el tiempo verbal", ["presente simple", "pasado experimental", "pasado no experimentado","futuro","futuro lejano",
                                "pasado habitual","presente habitual"])
