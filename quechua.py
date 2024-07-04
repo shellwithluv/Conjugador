@@ -50,7 +50,7 @@ if opcion == "Quienes somos":
     """)
 elif opcion == "Por qué es importante estudiar estas lenguas":
     st.sidebar.markdown("""
-        Estudiar lenguas originarias como el quechua y el aymara es crucial para preservar la riqueza cultural y lingüística de nuestras comunidades. Estas lenguas contienen conocimientos ancestrales y una visión única del mundo que debemos valorar y mantener vivos.
+        Estudiar lenguas originarias como el quechua y el aymara es crucial para preservar la riqueza cultural y lingüística de nuestras comunidades.
     """)
 elif opcion == "Bibliografía":
     st.sidebar.markdown("""
