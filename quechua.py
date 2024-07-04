@@ -46,7 +46,7 @@ opcion = st.sidebar.radio(
 
 if opcion == "Quienes somos":
     st.sidebar.markdown("""
-        Este es un trabajo final del curso de Linguística Computacional de la PUCP. La misión es proporcionar herramientas que faciliten el aprendizaje y la difusión del quechua y el aymara.
+        Este es un trabajo final del curso de Linguística Computacional de la PUCP. La misión es proporcionar herramientas digitales que faciliten el aprendizaje y la difusión del quechua y el aymara.
     """)
 elif opcion == "Por qué es importante estudiar estas lenguas":
     st.sidebar.markdown("""
