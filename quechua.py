@@ -37,6 +37,25 @@ st.markdown("""
 #Se inserta el título de la página
 st.markdown("<h1 class='title'>CONJUGADOR DE VERBOS EN QUECHUA Y AYMARA</h1>", unsafe_allow_html=True)
 
+#Se crea una barra lateral con diversas opciones
+st.sidebar.title("Menú")
+opcion = st.sidebar.radio(
+    "Selecciona una opción:",
+    ("Quienes somos", "Por qué es importante estudiar estas lenguas", "Bibliografía")
+)
+
+if opcion == "Quienes somos":
+    st.sidebar.markdown("""
+        Este es un trabajo final del curso de Linguística Computacional de la PUCP. La misión es proporcionar herramientas que faciliten el aprendizaje y la difusión del quechua y el aymara.
+    """)
+elif opcion == "Por qué es importante estudiar estas lenguas":
+    st.sidebar.markdown("""
+        Estudiar lenguas originarias como el quechua y el aymara es crucial para preservar la riqueza cultural y lingüística de nuestras comunidades. Estas lenguas contienen conocimientos ancestrales y una visión única del mundo que debemos valorar y mantener vivos.
+    """)
+elif opcion == "Bibliografía":
+    st.sidebar.markdown("""
+        La bibliografía utilizada para desarrollar este conjugador de verbos incluye el libro de Rodolfo Cerrón-Palomino "Quechumara: Estructuras paralelas del quechua y aimara (2008)".
+    """)
 # Función para cargar datos de Quechua desde archivos Excel
 def cargar_datos_quechua():
     # Cargar el archivo de verbos en Quechua
