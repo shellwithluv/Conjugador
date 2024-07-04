@@ -5,7 +5,7 @@ import streamlit as st
 st.markdown("""
     <style>
     .reportview-container {
-        background-color: #E6E6FA;  
+        background-color: #FFFDD0;
     }
     .title {
         text-align: center;
